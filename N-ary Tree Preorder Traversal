@@ -49,6 +49,8 @@ public:
 };
 */
 
+
+//recursive solution
 class Solution {
     vector<int> ans;
 public:
@@ -60,6 +62,30 @@ public:
     }
     vector<int> preorder(Node* root) {
         pre(root);
+        return ans;
+    }
+};
+
+//iterative solution using stack
+class Solution {
+public:
+    vector<int> preorder(Node* root) {
+        vector<int> ans;
+        
+        if(!root)   return ans;
+        
+        stack<Node*> q;
+        q.push(root);
+        
+        while(!q.empty()){
+            Node* node = q.top();
+            q.pop();
+            ans.push_back(node->val);
+            
+            for(int i=node->children.size()-1;i>=0;i--)
+                q.push(node->children[i]);
+        }
+        
         return ans;
     }
 };
